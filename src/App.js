@@ -8,8 +8,8 @@ class App extends Component {
       {id: 1, content: 'buy some milk'},
       {id: 2, content: 'play mario kart'}
     ],
-    flipflag: false,
-    flipflag1: false
+    flipflag1: false,
+    flipflag2: false
  
   }
   deleteTodo = (id) =>{
@@ -31,10 +31,6 @@ class App extends Component {
   editTodo = (id, content) =>{
     
     if(this.state.flipflag1 ===  true){
-    this.setState({
-      flipflag: !this.state.flipflag
-    })
-    if(this.state.flipflag ===  true){
       const todos = this.state.todos.map(todo => {
       if (todo.id === id){
         return {id: id, content: content}
@@ -45,13 +41,15 @@ class App extends Component {
     this.setState({
       todos,
     })
-  }
+  
   }
   }
   
-  onTodoChange = () =>{
-    
-    console.log(this.state.flipflag1)
+  onTodoChange = (id) =>{
+    this.setState({
+      flipflag2: id
+    })
+    console.log(id)
     this.setState({
       flipflag1: !this.state.flipflag1
     })
@@ -61,7 +59,7 @@ class App extends Component {
     return (
       <div className="todo-app container">
         <h1 className="center blue-text">Todo's</h1>
-        <Todos todos={this.state.todos} flag={this.state.flipflag} deleteTodo={this.deleteTodo} editTodo={this.editTodo} onTodoChange={this.onTodoChange}/>
+        <Todos todos={this.state.todos} flag={this.state.flipflag1} flag2={this.state.flipflag2} deleteTodo={this.deleteTodo} editTodo={this.editTodo} onTodoChange={this.onTodoChange}/>
         <AddTodo addTodo={this.addTodo}/>
       </div>  
     );
